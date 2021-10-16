@@ -94,13 +94,22 @@ and allows us to mathematically be sure that the proposed solution is the optima
 
 ### How it works
 To optimize the planning, an integer optimization program is used. The optimization model is composed by three main objects:
-1. The variables  
-Each variable is a binary variable $x_{ij} \in {0,1}$, which represents whether the resource $i$ on day $j$ 
+1. _The variables_  
+Each decision variable is a binary variable $x_{ij} \in {0,1}$, which represents whether the resource $i$ on day $j$ 
 comes back to the office. The number of resources and the number of days to consider can be both
 decided within code.
-2. The objective function
+2. _The objective function_  
+The objective function is composed by different terms. Each term is derived from a supposed contingency which is not general and should be customized.
+   1. _consecutive days_ - For a resource is easier to come back on consecutive week days, so whenever this occurs the objective function is increased by 1
+   2. same team - For a team working together it is better to come back on the same days, so whenever this occurs the objective function is increased. 
+   More precisely, if 2 team members come back on the same day the objective function is increased by 1. If 3 team members come back on the same day the objective function is increased by 2, and so on.
+   3. _Target presence_ - Every resource should comes back a minimum number of days, encouraging some equity in the returns to the office. So, whenever a resource
+   does not reach the mean presence of 2 days a week on the planning period, a penalty equal to the number of missing days is added to the objective function.
+   4. _Number of return days_ - Return to the office should be encouraged, so the objective function is increased of 1 for each return.
 
-3. The constraints
+These 4 terms can be weigthed according to personal preferences. Within the code, they all have the same weight. 
+
+3. _The constraints_
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
