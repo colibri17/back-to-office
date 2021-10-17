@@ -110,7 +110,7 @@ The objective function is composed by different terms.
    More precisely, if 2 team members come back on the same day the objective function is increased by 1. If 3 team members come back on the same day the objective function is increased by 2, and so on.
    3. _Target presence_ - Every resource should comes back a minimum number of days, encouraging some equity in the returns to the office. So, whenever a resource
    does not reach the mean presence of 2 days a week on the planning period, a penalty equal to the number of missing days is added to the objective function.
-   4. _Number of return days_ - Return to the office should be encouraged, so the objective function is increased of 1 for each return.
+   4. _Single returns_ - Return to the office should be encouraged, so the objective function is increased of 1 for each return.
 
 These 4 terms can be weigthed according to personal preferences. Within the code, they all have the same weight. 
 
@@ -121,6 +121,7 @@ There are different types of constraints in the algorithm. Each type is derived 
    2. _preference days_ - The resources are allowed to choose what are the days to come back and what are the days to not come back. The optimization
    algorithm finds solutions which agree with these preferences.
    3. _linearization constraints_ - Since we want the problem to be linear, non-linear variables are linearized by introducing some extra constraints. 
+   This allows to use a linear optimizer making the problem easier to solve optimally.  
 
 As the terms in the objective functions, the constraint types can be customized according to the user preferences and needs. For example,
 you might want to remove the preference day constraints, or add some more. Also, notice that according to the needs some terms added to the objective function
