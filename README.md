@@ -33,15 +33,15 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Back to office optimizer</h3>
+  <h3 align="center">Back To Office Optimizer</h3>
 
   <p align="center">
     An optimization algorithm applied to plan the returns to the office or smartworking days for your team.
     <br />
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/colibri17/back-to-office/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/colibri17/back-to-office/issues">Request Feature</a>
   </p>
 </div>
 
@@ -86,22 +86,27 @@ or the scheduling of smartworking days.
 This planning can be really complicated to perform for humans. Especially if 
 there are many constraints to take into account (e.g. return preferences, workstations, maximum 
 room capacities and so on), choosing the best configuration can be really hard. Furthermore, 
-there are generally no guarantees that the solution we found is the optimal one.
+there are generally no guarantees that the identified solution is the optimal one.
 
-In this regards, an optimization algorithm can help. In fact, it can take 
+In this regards, an optimization algorithm can help. It can take 
 into account different factors, define hard constraints to prevent specified configurations,
-and allows us to mathematically be sure that the proposed solution is the optimal one.
+and allow to mathematically be sure that the proposed solution is the optimal one.
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### How it works
-To optimize the planning, an integer optimization program is used. The optimization model is composed by three main objects:
-1. _The variables_  
+To optimize the planning, an integer optimization algorithm is used. The optimization model is composed by three main objects:
+1. _The decision variables_  
 Each decision variable is a binary variable $x_{ij} \in {0,1}$, which represents whether the resource $i$ on day $j$ 
 comes back to the office. The number of resources and the number of days to consider can be both
-decided within code.
+selected within the code.   
+Along with these variables, we defined some non-linear decision variables that are obtained as the product of two or more binary variables and
+that are used within the code to express terms in the objective functions or in the constraints. 
 2. _The objective function_  
-The objective function is composed by different terms. Each term is derived from a supposed contingency which is not general and should be customized.
+The objective function is composed by different terms.
    1. _consecutive days_ - For a resource is easier to come back on consecutive week days, so whenever this occurs the objective function is increased by 1
-   2. same team - For a team working together it is better to come back on the same days, so whenever this occurs the objective function is increased. 
+   2. _same team_ - For a team working together it is better to come back on the same days, so whenever this occurs the objective function is increased. 
    More precisely, if 2 team members come back on the same day the objective function is increased by 1. If 3 team members come back on the same day the objective function is increased by 2, and so on.
    3. _Target presence_ - Every resource should comes back a minimum number of days, encouraging some equity in the returns to the office. So, whenever a resource
    does not reach the mean presence of 2 days a week on the planning period, a penalty equal to the number of missing days is added to the objective function.
@@ -110,24 +115,26 @@ The objective function is composed by different terms. Each term is derived from
 These 4 terms can be weigthed according to personal preferences. Within the code, they all have the same weight. 
 
 3. _The constraints_
+There are different types of constraints in the algorithm. Each type is derived from a supposed contingency which is not general and can be customized.
+   1. _maximum and minimum number of resources_ - There is a maximum and minimum number of resources which can return to the office each day. The optimization
+   algorithm prevents from finding solutions which exceed this maximum number or are below the minimum number. 
+   2. _preference days_ - The resources are allowed to choose what are the days to come back and what are the days to not come back. The optimization
+   algorithm finds solutions which agree with these preferences.
+   3. _linearization constraints_ - Since we want the problem to be linear, non-linear variables are linearized by introducing some extra constraints. 
 
+As the terms in the objective functions, the constraint types can be customized according to the user preferences and needs. For example,
+you might want to remove the preference day constraints, or add some more. Also, notice that according to the needs some terms added to the objective function
+might become constraints and vice versa.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This section list any major frameworks/libraries used to bootstrap the project:
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [Python](https://www.python.org/)
+* [PuLP](https://coin-or.github.io/pulp/)
+* [Pandas](https://vuejs.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -136,31 +143,25 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+You have to install Python on your system. On Ubuntu 16.10 or newer, this can be done:
   ```sh
-  npm install npm@latest -g
+  sudo apt-get update
+  sudo apt-get install python3
   ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   https://github.com/colibri17/back-to-office
    ```
-3. Install NPM packages
+2. Install `Pandas` and `Pulp` libraries using `pip` 
    ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   pip install -u pandas pulp 
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -169,7 +170,7 @@ This is an example of how to list things you need to use the software and how to
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
+All the code is contained in the notebook `optimizazion.ipynb` 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
