@@ -68,7 +68,7 @@ and allow to mathematically be sure that the proposed solution is the optimal on
 ### How it works
 To optimize the planning, an integer optimization algorithm is used. The optimization model is composed by three main objects:
 1. _The decision variables_  
-Each decision variable is a binary variable $x_{ij} \in {0,1}$, which represents whether the resource $i$ on day $j$ 
+Each decision variable is a binary variable x<sub>ij</sub> which represents whether the resource i on day j 
 comes back to the office. The number of resources and the number of days to consider can be both
 selected within the code.   
 Along with these variables, we defined some non-linear decision variables that are obtained as the product of two or more binary variables and
