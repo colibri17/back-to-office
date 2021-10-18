@@ -23,7 +23,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/colibri17/back-to-office">
-    <img src="imgs/logo.png" alt="Logo" width="605" height="252">
+    <img src="imgs/logo.png" alt="Logo" width="874" height="337">
   </a>
 
   <h3 align="center">Back To Office Optimizer</h3>
