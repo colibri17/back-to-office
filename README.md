@@ -164,10 +164,10 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Refactor code using object oriented programming
-- [ ] Add tests
-- [ ] Create a dashboard to use the algorithm
-- [ ] Dockerize 
+- [ ] Design and refactor the code contained in the notebook
+- [ ] Add tests to validate results
+- [ ] Create a dashboard to allow final users to interact with the algorithm
+- [ ] Dockerize the application 
 
 See the [open issues](https://github.com/colibri17/back-to-office/issues) for a full list of proposed features (and known issues).
 
