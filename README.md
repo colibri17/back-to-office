@@ -50,23 +50,23 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project aims to provide a tool to all managers for better planning the return of employees to office 
-or their smartworking schedule.
+This project aims to provide a tool to all managers for better planning the return of employees to the office 
+or their smartworking schedules.
 
 Such a planning can be really complicated to realize for humans. Choosing the best configuration can be really hard, 
 especially if there are many constraints to take into account 
 (e.g. return preferences, workstations, maximum room capacities and so on). Furthermore, 
 there are generally no guarantees that the solution found is the optimal one.
 
-In this regards, an optimization algorithm can help. It can take 
+For these reasons, an optimization algorithm can help. It can take 
 into account different factors, define hard constraints to prevent specified configurations,
-and allow to mathematically be sure that the proposed solution is the optimal one.
+and mathematically be sure that the identified solution is the optimal one.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### How it works
-To optimize the planning, an integer optimization algorithm is used. The optimization model is composed by three main objects:
+To optimize planning, an integer optimization algorithm is used. The optimization model is composed by three main objects:
 1. _The decision variables_  
 Each decision variable is a binary variable x<sub>ij</sub> which represents whether the employee i on day j 
 comes back to the office. The number of employees and the number of days to consider can be both
@@ -76,7 +76,7 @@ that are used within the code to express terms in the objective functions or in 
 2. _The objective function_ 
 The objective function is composed by different terms.
    1. _consecutive days_ - For an employee might be easier to come back on consecutive week days, so whenever this occurs the objective function is increased by 1
-   2. _same team_ - Members in the same team prefer come back on same days, so whenever this occurs the objective function is increased. 
+   2. _same team_ - Members of the same team prefer to come back on same days, so whenever this occurs the objective function is increased. 
    More precisely, if 2 team members come back on the same day the objective function is increased by 1. If 3 team members come back on the same day the objective function is increased by 2, and so on.
    3. _Target presence_ - Every employee should come back a minimum number of days, encouraging some equity in the returns to office. So, whenever a employee
    does not reach the mean presence of 2 days a week on the planning period, a penalty equal to the number of missing days is added to the objective function.
@@ -87,7 +87,7 @@ These 4 terms can be weigthed according to personal preferences. Within the code
 
 3. _The constraints_
 There are different types of constraints in the algorithm. Each type is derived from a supposed contingency which is not general and can be customized.
-   1. _maximum and minimum number of employees_ - There is a maximum and minimum number of employees which can return to office each day. The optimization
+   1. _maximum and minimum number of employees_ - There is a maximum and minimum number of employees which can return to office per day. The optimization
    algorithm prevents from finding solutions which exceed these values. 
    2. _preference days_ - The employees are allowed to choose what are the days to come back and what are the days to not come back. The optimization
    algorithm finds solutions which agree with these preferences.
